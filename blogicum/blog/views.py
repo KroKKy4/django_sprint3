@@ -1,8 +1,9 @@
 from datetime import datetime
 
-from .models import Post, Category
+from django.shortcuts import get_object_or_404, render
 
-from django.shortcuts import render, get_object_or_404
+from .const_num import POSTS_COUNT
+from .models import Category, Post
 
 
 def posts():
@@ -20,7 +21,8 @@ def posts():
 
 def index(request):
     """Главная страница."""
-    return render(request, 'blog/index.html', {'post_list': posts()[:5]})
+    return render(request, 'blog/index.html',
+                  {'post_list': posts()[:POSTS_COUNT]})
 
 
 def post_detail(request, post_id):
